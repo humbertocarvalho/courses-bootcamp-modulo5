@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
-import { Loading, Owner, IssueList } from './styles';
+import { Loading, Owner, IssueList, Label } from './styles';
 import Container from '../../components/Container';
 
 export default class Repository extends Component {
@@ -68,9 +68,11 @@ export default class Repository extends Component {
               <div>
                 <strong>
                   <a href={issue.html_url}>{issue.title}</a>
-                  {
-                    // LABELS
-                  }
+                  {issue.labels.map(label => (
+                    <Label color={label.color} key={String(label.id)}>
+                      {label.name}
+                    </Label>
+                  ))}
                 </strong>
                 <p>{issue.user.login}</p>
               </div>
